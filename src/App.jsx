@@ -13,7 +13,13 @@ function App() {
     let newListTodo=[...listTodo];
     newListTodo.splice(key,1)
     setListTodo([...newListTodo])
-  }
+  };
+
+  const toggleComplete = (index) => {
+    const newListTodo = [...listTodo];
+    newListTodo[index].completed = !newListTodo[index].completed;
+    setListTodo(newListTodo);
+  };
 
   return (
     <div className="main-container">
@@ -25,7 +31,7 @@ function App() {
         <hr />
         {listTodo.map((listItem,i)=>{
           return (
-            <TodoList key={i} index={i} item={listItem} deleteItem={deleteListItem}/>     
+            <TodoList key={i} index={i} item={listItem} deleteItem={deleteListItem} toggleComplete={toggleComplete}/>     
           ) 
         })}
       </div>

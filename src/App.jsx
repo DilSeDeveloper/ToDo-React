@@ -1,41 +1,46 @@
-import { useState } from "react";
-import "./App.css";
-import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
+import React from 'react'
+import {useState} from "react";
+import TodoInput from './components/TodoInput';
+import TodoList from './components/TodoList';
+import './App.css';
 function App() {
-  const [listTodo, setListTodo] = useState([]);
-  let addList = (inputText) => {
-    if(inputText!=='')
-      setListTodo([...listTodo, inputText]);
-  };
+  const [listText, setListText]=useState([]);
+  let addList= (inputText)=>{
+       if(inputText!==''){
+        setListText([
+  ...listText,
+  { text: inputText, completed: false }
+]);
 
-  const deleteListItem= (key)=>{
-    let newListTodo=[...listTodo];
-    newListTodo.splice(key,1)
-    setListTodo([...newListTodo])
-  };
-
-  const toggleComplete = (index) => {
-    const newListTodo = [...listTodo];
-    newListTodo[index].completed = !newListTodo[index].completed;
-    setListTodo(newListTodo);
-  };
-
+       }
+  }
+  const deleteText=(key)=>{
+        let newTodo= [...listText];
+        newTodo.splice(key,1);
+        setListText([...newTodo]);
+  }
+  const toggleComplete=(index)=>{
+    let newList=[...listText];
+    newList[index].completed=!newList[index].completed;
+    setListText(newList);
+  }
   return (
-    <div className="main-container">
+    <div className='main-container'>
       <div className="center-container">
-        <TodoInput addList={addList} />  {/* input field  */}
-        
-        <h1 className="app-heading" >TODO</h1>  {/* TODO heading   */}
-
+        <TodoInput addList={addList}/>
+        <h1>TODO</h1>
         <hr />
-        {listTodo.map((listItem,i)=>{
-          return (
-            <TodoList key={i} index={i} item={listItem} deleteItem={deleteListItem} toggleComplete={toggleComplete}/>     
-          ) 
+
+        {listText.map((listItem,i)=>{
+           return (
+                <TodoList key={i} index={i} item={listItem} deleteItem={deleteText} toggleComplete={toggleComplete}/>
+           )
         })}
+       
       </div>
+      
     </div>
   );
 }
-export default App;
+
+export default App

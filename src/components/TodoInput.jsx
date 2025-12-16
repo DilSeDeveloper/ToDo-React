@@ -1,35 +1,38 @@
-import React from "react";
 import { useState } from "react";
-function TodoInput(props) {
+import InputField from "./InputField";
+import AddButton from "./AddButton";
+
+function TodoInput({ addList }) {
   const [inputText, setInputText] = useState("");
-  const handleEnterPress=(e)=>{
-    if(e.keyCode==13){
-       props.addList(inputText);
-        setInputText("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if (/^[a-zA-Z0-9 ]*$/.test(value)) {
+      setInputText(value);
     }
-  }
+  };
+
+ const handleAdd = () => {
+  if (inputText.trim() === "") return;
+  addList(inputText);
+  setInputText("");
+};
+
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleAdd();
+    }
+  };
+
   return (
     <div className="input-container">
-      <input
-        type="text"
-        className="input-box-todo"
-        placeholder="enter your task "
+      <InputField
         value={inputText}
-        onChange={(e) => {
-          setInputText(e.target.value);
-        }}
-        onKeyDown={handleEnterPress}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
-      <button
-        className="add-btn"
-        onClick={() => {
-          props.addList(inputText);
-          setInputText(""); //after writing the text should get removed from the placeholder
-        }}
-      >
-        +
-      </button>
-
+      <AddButton onClick={handleAdd} />
     </div>
   );
 }

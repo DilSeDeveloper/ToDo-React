@@ -1,18 +1,15 @@
-function TodoList(props) {
+import CheckBox from "./CheckBox";
+import DeleteButton from "./DeleteButton";
+
+function TodoList({ item, index, toggleComplete, deleteItem }) {
   return (
     <div className="todo-item">
-      <input
-        type="checkbox"
-        checked={props.item.completed}
-        onChange={() => props.toggleComplete(props.index)}
+      <CheckBox
+        checked={item.completed}
+        onChange={() => toggleComplete(index)}
       />
-      <span>{props.item}</span>
-      <button
-        className="delete-btn"
-        onClick={() => props.deleteItem(props.index)}
-      >
-        <i className="fa-solid fa-trash"></i>
-      </button>
+      <span>{item.text}</span>
+      <DeleteButton onClick={() => deleteItem(index)} />
     </div>
   );
 }

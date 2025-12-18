@@ -6,38 +6,36 @@ function TodoInput({ addList }) {
   const [inputText, setInputText] = useState("");
 
   const handleChange = (e) => {
-  const value = e.target.value;
+    const value = e.target.value;
 
-  let hasLetter = false;
-  let hasOnlyValidChars = true;
+    let hasLetter = false;
+    let valid = true;
 
-  for (let char of value) {
-    // check if character is a letter
-    if ((char >= "a" && char <= "z") || (char >= "A" && char <= "Z")) {
-      hasLetter = true;
+    for (let char of value) {
+      if (
+        (char >= "a" && char <= "z") ||
+        (char >= "A" && char <= "Z")
+      ) {
+        hasLetter = true;
+      } else if (
+        !((char >= "0" && char <= "9") || char === " ")
+      ) {
+        valid = false;
+        break;
+      }
     }
-  
-    else if (
-      !((char >= "0" && char <= "9") || char === " ")
-    ) {
-      hasOnlyValidChars = false;
-      break;
-    }
-  }
 
-  if (!hasOnlyValidChars) return;
-  if (!hasLetter && value.trim() !== "") return;
-  setInputText(value);
-};
+    if (!valid) return;
+    if (!hasLetter && value.trim() !== "") return;
 
+    setInputText(value);
+  };
 
-
- const handleAdd = () => {
-  if (inputText.trim() === "") return;
-  addList(inputText);
-  setInputText("");
-};
-
+  const handleAdd = () => {
+    if (inputText.trim() === "") return;
+    addList(inputText);
+    setInputText("");
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {

@@ -64,8 +64,6 @@ function App() {
             onClick={() => setFilter("all")}
           />
         </div>
-
-        {/* Render List */}
         {filteredList.map((item, i) => (
           <TodoList
             key={i}

@@ -41,7 +41,6 @@ function App() {
 
         <TodoInput addList={addList} />
 
-        <h1>TODO</h1>
         <hr />
 
         {/* Filter Buttons */}

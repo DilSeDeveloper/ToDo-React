@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
+import FilterButton from "./components/FilterButton";
 import "./App.css";
 
 function App() {
@@ -45,26 +46,23 @@ function App() {
 
         {/* Filter Buttons */}
         <div className="filter-buttons">
-          <button
-            className={filter === "pending" ? "active" : ""}
+          <FilterButton
+            label="Pending"
+            isActive={filter === "pending"}
             onClick={() => setFilter("pending")}
-          >
-            Pending
-          </button>
+          />
 
-          <button
-            className={filter === "completed" ? "active" : ""}
+          <FilterButton
+            label="Completed"
+            isActive={filter === "completed"}
             onClick={() => setFilter("completed")}
-          >
-            Completed
-          </button>
+          />
 
-          <button
-            className={filter === "all" ? "active" : ""}
+          <FilterButton
+            label="All"
+            isActive={filter === "all"}
             onClick={() => setFilter("all")}
-          >
-            All
-          </button>
+          />
         </div>
 
         {/* Render List */}

@@ -9,13 +9,18 @@ function App() {
   const [filter, setFilter] = useState("all"); // all | pending | completed
 
   const addList = (inputText) => {
-    if (inputText.trim() !== "") {
-      setListText([
-        ...listText,
-        { text: inputText, completed: false },
-      ]);
-    }
-  };
+  if (inputText.trim() !== "") {
+    setListText([
+      ...listText,
+      { 
+        text: inputText,
+        completed: false,
+        timestamp: new Date().toLocaleString()
+      },
+    ]);
+  }
+};
+
 
   const deleteText = (index) => {
     const newList = [...listText];

@@ -35,6 +35,7 @@ function App() {
   };
 
   const filteredList = listText.filter((item) => {
+    console.log("called");
     if (filter === "pending") return !item.completed;
     if (filter === "completed") return item.completed;
     return true; // all
